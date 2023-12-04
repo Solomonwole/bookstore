@@ -34,6 +34,7 @@ function LandingPage() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const productsPerPage = 16;
 	const [loading, setLoading] = useState(true);
+	const [currentCategory, setCurrentCategory] = useState("All");
 
 	// Categories Menu
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -78,6 +79,7 @@ function LandingPage() {
 	}, [setFilteredProducts, setProducts]);
 
 	const handleCategoryClick = (category) => {
+		setCurrentCategory(category);
 		if (category === "All") {
 			setFilteredProducts(products);
 		} else {
@@ -122,31 +124,61 @@ function LandingPage() {
 
 	console.log(currentProducts);
 	return (
-		<Box mb={10}>
+		<Box pb={10}>
 			<Container maxWidth="lg">
 				<Box
 					mt={3}
 					// mb={5}
 					sx={{
-						display: "flex",
-						flexDirection: { xs: "column", md: "row" },
+						display: "grid",
+						gridTemplateColumns: { xs: "1fr", md: "1fr 4fr" },
 					}}>
 					{/* Categories  */}
+
 					<Box
 						sx={{
 							borderRight: { md: "1px solid #D3D3D3" },
-							width: { xs: "100%", md: "15%" },
 							display: { xs: "none", md: "block" },
-							minHeight: { md: "80vh" },
+							minHeight: { md: "90vh" },
 						}}>
 						<List>
-							<ListItem key="all" onClick={() => handleCategoryClick("All")}>
-								All
+							<ListItem
+								key="all"
+								onClick={() => handleCategoryClick("All")}
+								sx={{
+									backgroundColor:
+										currentCategory === "All"
+											? theme.palette.primary.main
+											: "none",
+									color: currentCategory === "All" ? "#fff" : "inherit",
+									"&:hover": {
+										backgroundColor:
+											currentCategory === "All"
+												? theme.palette.primary.main
+												: "#fb625d5d",
+										color: "#fff",
+									},
+								}}>
+								All Categories
 							</ListItem>
 							{categories.map((category, index) => (
 								<ListItem
 									key={index}
-									onClick={() => handleCategoryClick(category)}>
+									onClick={() => handleCategoryClick(category)}
+									sx={{
+										backgroundColor:
+											currentCategory === category
+												? theme.palette.primary.main
+												: "none",
+										color: currentCategory === category ? "#fff" : "inherit",
+										"&:hover": {
+											backgroundColor:
+												currentCategory === category
+													? theme.palette.primary.main
+													: "#fb625d5d",
+											color: currentCategory === category ? "#fff" : "inherit",
+										},
+									}}>
 									{category}
 								</ListItem>
 							))}
@@ -206,14 +238,30 @@ function LandingPage() {
 								horizontal: "center",
 							}}>
 							<Box sx={{ minWidth: 200, p: 2 }}>
-								<Typography sx={{ fontWeight: 600 }}>Categories</Typography>
+								<Typography mb={3} sx={{ fontWeight: 600 }}>
+									Categories
+								</Typography>
 								<MenuItem
 									key="all"
 									onClick={() => {
 										handleClose();
 										handleCategoryClick("All");
+									}}
+									sx={{
+										backgroundColor:
+											currentCategory === "All"
+												? theme.palette.primary.main
+												: "none",
+										color: currentCategory === "All" ? "#fff" : "inherit",
+										"&:hover": {
+											backgroundColor:
+												currentCategory === "All"
+													? theme.palette.primary.main
+													: "#fb625d5d",
+											color: "#fff",
+										},
 									}}>
-									All
+									All Categories
 								</MenuItem>
 								{categories.map((category, index) => (
 									<MenuItem
@@ -221,6 +269,21 @@ function LandingPage() {
 										onClick={() => {
 											handleClose();
 											handleCategoryClick(category);
+										}}
+										sx={{
+											backgroundColor:
+												currentCategory === category
+													? theme.palette.primary.main
+													: "none",
+											color: currentCategory === category ? "#fff" : "inherit",
+											"&:hover": {
+												backgroundColor:
+													currentCategory === category
+														? theme.palette.primary.main
+														: "#fb625d5d",
+												color:
+													currentCategory === category ? "#fff" : "inherit",
+											},
 										}}>
 										{category}
 									</MenuItem>

@@ -8,8 +8,8 @@ function ProductTemplate({ item }) {
 		<>
 			<Box
 				p={1}
-				// maxHeight={400}
 				sx={{
+					minWidth: "100%",
 					cursor: "pointer",
 					"&:hover": {
 						boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.096)",
