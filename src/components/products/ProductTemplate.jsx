@@ -8,6 +8,7 @@ function ProductTemplate({ item }) {
 		<>
 			<Box
 				p={1}
+				// maxHeight={400}
 				sx={{
 					cursor: "pointer",
 					"&:hover": {

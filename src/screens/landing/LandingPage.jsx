@@ -54,7 +54,7 @@ function LandingPage() {
 				const query = new Parse.Query(Product);
 
 				// Order by updatedAt in descending order to get the latest products first
-				query.ascending("updatedAt");
+				query.descending("updatedAt");
 
 				const results = await query.find();
 
@@ -126,7 +126,7 @@ function LandingPage() {
 			<Container maxWidth="lg">
 				<Box
 					mt={3}
-					mb={5}
+					// mb={5}
 					sx={{
 						display: "flex",
 						flexDirection: { xs: "column", md: "row" },
@@ -137,6 +137,7 @@ function LandingPage() {
 							borderRight: { md: "1px solid #D3D3D3" },
 							width: { xs: "100%", md: "15%" },
 							display: { xs: "none", md: "block" },
+							minHeight: { md: "80vh" },
 						}}>
 						<List>
 							<ListItem key="all" onClick={() => handleCategoryClick("All")}>
